@@ -6,7 +6,7 @@ import { Tesseract } from "tesseract.ts";
 const App = () => {
   // hook for text change
   const [yourText, setText] = useState("");
-  //test
+
   //working
   // OCR process
   // Tesseract.recognize(require('./image/testocr.jpg'))
