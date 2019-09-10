@@ -7,6 +7,7 @@ const App = () => {
   // hook for text change
   const [yourText, setText] = useState("");
 
+  
   //working
   // OCR process
   // Tesseract.recognize(require('./image/testocr.jpg'))
