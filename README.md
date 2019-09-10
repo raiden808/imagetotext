@@ -1,2 +1,0 @@
-# imagetotext
-Created with CodeSandbox
