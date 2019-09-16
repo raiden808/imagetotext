@@ -2,12 +2,19 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./styles.css";
 import { Tesseract } from "tesseract.ts";
+import axios from 'axios'
 
 const App = () => {
   // hook for text change
-  const [yourText, setText] = useState("");
+  const [yourFile,setFile] = useState({
+    selectedFile:null,
+    loaded:0,
+  });
 
-  
+  //for test since hook is broken on extension yet
+  //const [viewFile,setView] = useState("");
+
+
   //working
   // OCR process
   // Tesseract.recognize(require('./image/testocr.jpg'))
@@ -20,51 +27,36 @@ const App = () => {
   //    	Tesseract.terminate();
   //  	});
 
-  // for test
-  // let textHolder = stripText(require('./image/testocr.jpg'));
-  // useEffect(() => {
-  //   	// Update the document title using the browser API
-  //   	//document.title = `You clicked ${count} times`;
-  //   	// let textHolder = stripText(require('./image/testocr.jpg'));
-  //   	//let textHolder = stripText(require('./image/testocr.jpg'));
-  //   	//console.log(textHolder)
-  //   	setText(textHolder)
-  // 	},[textHolder]);
+
+  const onChangeHandler = (e) => {
+
+    const fileObject = {
+      ...yourFile,
+      selectedFile:e.target.files[0]
+    }
+    setFile(fileObject)
+
+    //for test
+    //setView(e.target.files[0])
+
+    //console.log(e.target.files[0])
+    console.log(yourFile);
+  };
+
+  const onClickHandler = () =>{
+    const data = new FormData()
+
+    data.append('file',yourFile.selectedFile)
+  }
 
   return (
-    <>
+    <div className="form-group files">
       <h1>Your Text</h1>
-      <p>{yourText}</p>
-      <input type="file" name="file" onChange={onChangeHandler} />
-    </>
+      <p>{}</p>
+      <input type="file" name="file" onChange={(e) =>onChangeHandler(e)} />
+      <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button> 
+    </div>
   );
-};
-
-const onChangeHandler = event => {
-  // file object
-  // console.log(event.target.files[0])
-  //alert(stripText(event.target.files[0].name))
-
-  console.log(event.target.files);
-};
-
-// return hook as a subcomponent
-//const DisplayScan = (props)
-
-const stripText = image => {
-  let resultText = "";
-  // OCR process
-  Tesseract.recognize(image)
-    .progress(progress => {
-      //console.log('progress', progress);
-    })
-    .then(result => {
-      //console.log('result', result);
-      resultText = result.text;
-      //console.log(resultText)
-      Tesseract.terminate();
-    });
-  return resultText;
 };
 
 ReactDOM.render(<App />, document.getElementById("root"));
