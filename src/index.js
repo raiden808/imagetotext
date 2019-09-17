@@ -47,6 +47,12 @@ const App = () => {
     const data = new FormData()
 
     data.append('file',yourFile.selectedFile)
+    axios.post("http://localhost:3000/upload", data, { 
+    // receive two parameter endpoint url ,form data 
+    })
+    .then(res => { // then print response status
+      console.log(res.statusText)
+    })
   }
 
   return (
@@ -54,7 +60,7 @@ const App = () => {
       <h1>Your Text</h1>
       <p>{}</p>
       <input type="file" name="file" onChange={(e) =>onChangeHandler(e)} />
-      <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button> 
+      <button type="button" class="btn btn-success btn-block" onClick={onClickHandler}>Upload</button> 
     </div>
   );
 };
