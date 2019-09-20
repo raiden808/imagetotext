@@ -43,11 +43,15 @@ const App = () => {
     console.log(yourFile);
   };
 
+  /*
+  * in order for file to work, make sure server js is running on seperate window
+  * node server.js
+  */
   const onClickHandler = () =>{
     const data = new FormData()
 
     data.append('file',yourFile.selectedFile)
-    axios.post("http://localhost:3000/upload", data, { 
+    axios.post("http://localhost:8000/", data, { 
     // receive two parameter endpoint url ,form data 
     })
     .then(res => { // then print response status
