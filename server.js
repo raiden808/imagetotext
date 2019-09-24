@@ -9,11 +9,12 @@ var storage = multer.diskStorage({
     // folder you specified
     destination: function (req, file, cb) {
       // cb(null, 'public')
-       cb(null, 'upload')
+       cb(null, 'src/uploads')
     },
     // file name of the ocr
     filename: function (req, file, cb) {
-      cb(null, Date.now() + '-' +file.originalname )
+      cb(null, "image.jpg" )
+      //console.log("ile is:",file.encoding);
     }
   })
   
