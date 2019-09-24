@@ -6,9 +6,12 @@ var cors    = require('cors')
 app.use(cors())
 
 var storage = multer.diskStorage({
+    // folder you specified
     destination: function (req, file, cb) {
-      cb(null, 'public')
+      // cb(null, 'public')
+       cb(null, 'upload')
     },
+    // file name of the ocr
     filename: function (req, file, cb) {
       cb(null, Date.now() + '-' +file.originalname )
     }

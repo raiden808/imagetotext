@@ -51,7 +51,7 @@ const App = () => {
     const data = new FormData()
 
     data.append('file',yourFile.selectedFile)
-    axios.post("http://localhost:8000/", data, { 
+    axios.post("http://localhost:8000/upload", data, { 
     // receive two parameter endpoint url ,form data 
     })
     .then(res => { // then print response status
