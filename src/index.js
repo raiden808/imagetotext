@@ -7,12 +7,18 @@ import Upload from './components/upload'
 
 const App = () => {
   // hook for text change
+  const [yourText,setText] = useState("");
 
-
-  const [yourText,setText] = useState("")
+  const changeTextValue = (newOcrText) =>{
+  	setText(newOcrText);
+  }
 
   return (
-  
+  	<div>
+  		<Upload  changeTextValue={changeTextValue}  />
+  		<h2>OCR Text</h2>
+  		<p>{yourText}</p>
+  	</div>
   );
 };
 

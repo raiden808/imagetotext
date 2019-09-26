@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Tesseract } from "tesseract.ts";
 import axios from 'axios'
 
-const Upload = props =>{
+const Upload = ({changeTextValue}) =>{
 
 	const [yourFile,setFile] = useState({
 	    selectedFile:null,
@@ -32,14 +32,15 @@ const Upload = props =>{
 	      console.log(res.statusText)
 	    })
 
-	    Tesseract.recognize(require('./uploads/image.jpg'))
+	    Tesseract.recognize(require('../uploads/image.jpg'))
 	      .progress(progress => {
 	        console.log('progress', progress);
 	      }).then(result => {
+	      	
 	      console.log('result', result);
-	      // change the hookstate
-	      //setText(result.text)
 	      Tesseract.terminate();
+
+	      changeTextValue(result.text);
 	    });
 	}
 
@@ -47,8 +48,6 @@ const Upload = props =>{
 	  	<div className="form-group files">
 	      <input type="file" name="file" onChange={(e) =>onChangeHandler(e)} />
 	      <button type="button" class="btn btn-success btn-block" onClick={onClickHandler}>Upload</button> 
-	      <h1>Your Text</h1>
-	      <p>{yourText}</p>
 	    </div>
   	)
 
