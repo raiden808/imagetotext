@@ -16,7 +16,7 @@ var storage = multer.diskStorage({
       cb(null, "image.jpg" )
       //console.log("ile is:",file.encoding);
     }
-  })
+})
   
 var upload = multer({ storage: storage }).array('file')
 
