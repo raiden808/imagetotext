@@ -8,16 +8,33 @@ import Upload from './components/upload'
 const App = () => {
   // hook for text change
   const [yourText,setText] = useState("");
+  let renderLayout;
 
   const changeTextValue = (newOcrText) =>{
   	setText(newOcrText);
   }
 
+  const handleClickReset = () =>{
+    window.location.reload(false);
+  }
+
+  if(yourText == ""){
+    renderLayout = 
+    <>
+      <Upload  changeTextValue={changeTextValue}  />
+    </>
+  }else{
+    renderLayout = 
+    <>
+      <h2>OCR Text</h2>
+      <p>{yourText}</p>
+      <button onClick={handleClickReset} >Scan Again</button>
+    </>
+  }
+
   return (
   	<div>
-  		<Upload  changeTextValue={changeTextValue}  />
-  		<h2>OCR Text</h2>
-  		<p>{yourText}</p>
+  		{renderLayout}
   	</div>
   );
 };
