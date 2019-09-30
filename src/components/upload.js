@@ -30,18 +30,21 @@ const Upload = ({changeTextValue}) =>{
 	    })
 	    .then(res => { // then print response status
 	      console.log(res.statusText)
+		    // add delay to reduce unecesarry reload.
+		    setTimeout(function () {
+		    	Tesseract.recognize(require('../uploads/image.jpg'))
+		      	.progress(progress => {
+		        	console.log('progress', progress);
+		      	}).then(result => {
+			      console.log('result', result);
+			      Tesseract.terminate();
+
+			      changeTextValue(result.text);
+		    	});
+		    }, 1000);
 	    })
 
-	    Tesseract.recognize(require('../uploads/image.jpg'))
-	      .progress(progress => {
-	        console.log('progress', progress);
-	      }).then(result => {
-	      	
-	      console.log('result', result);
-	      Tesseract.terminate();
-
-	      changeTextValue(result.text);
-	    });
+	    
 	}
 
   	return (
