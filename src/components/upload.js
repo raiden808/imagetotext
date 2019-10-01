@@ -15,6 +15,8 @@ const Upload = ({changeTextValue}) =>{
 	      selectedFile:e.target.files[0]
 	    }
 	    setFile(fileObject)
+
+	    onClickHandler();
 	};
 
 	/*
@@ -35,6 +37,9 @@ const Upload = ({changeTextValue}) =>{
 		    	Tesseract.recognize(require('../uploads/image.jpg'))
 		      	.progress(progress => {
 		        	console.log('progress', progress);
+
+		        	changeTextValue("loading");
+
 		      	}).then(result => {
 			      console.log('result', result);
 			      Tesseract.terminate();
@@ -43,14 +48,18 @@ const Upload = ({changeTextValue}) =>{
 		    	});
 		    }, 1000);
 	    })
-
-	    
 	}
 
   	return (
-	  	<div className="form-group files">
-	      <input type="file" name="file" onChange={(e) =>onChangeHandler(e)} />
-	      <button type="button" class="btn btn-success btn-block" onClick={onClickHandler}>Upload</button> 
+	  	<div className="form">
+	  		<div className="file-upload-wrapper">
+	      		<input 
+	      			className="fileUpload" 
+	      			type="file" 
+	      			name="file" 
+	      			onChange={(e) =>onChangeHandler(e)} 
+	      		/>
+	    	</div>
 	    </div>
   	)
 

@@ -23,17 +23,33 @@ const App = () => {
     <>
       <Upload  changeTextValue={changeTextValue}  />
     </>
+  }else if(yourText == "loading"){
+    renderLayout = 
+    <>
+      <div className="lds-dual-ring"></div>
+    </>
   }else{
     renderLayout = 
     <>
-      <h2>OCR Text</h2>
       <p>{yourText}</p>
-      <button onClick={handleClickReset} >Scan Again</button>
+      <div className="btnWrapper">
+        <button 
+          className="btnScan" 
+          onClick={handleClickReset}>
+          Copy
+        </button>
+        <button 
+          className="btnScan" 
+          onClick={handleClickReset}>
+          Scan Again
+        </button>
+      </div>
+      
     </>
   }
 
   return (
-  	<div>
+  	<div className="container">
   		{renderLayout}
   	</div>
   );
