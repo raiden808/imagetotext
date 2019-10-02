@@ -16,7 +16,7 @@ const Upload = ({changeTextValue}) =>{
 	    }
 	    setFile(fileObject)
 
-	    onClickHandler();
+	    console.log(e.target.files[0])
 	};
 
 	/*
@@ -24,9 +24,18 @@ const Upload = ({changeTextValue}) =>{
 	* node server.js
 	*/
   	const onClickHandler = () =>{
-	    const data = new FormData()
 
-	    data.append('file',yourFile.selectedFile)
+  		if(yourFile.selectedFile == null){
+  			alert("Empty");
+  			return;
+  		}
+
+  		ocrProcess(yourFile.selectedFile);
+	}
+
+	const ocrProcess = (selectedFile) =>{
+		const data = new FormData()
+	    data.append('file',selectedFile)
 	    axios.post("http://localhost:8000/upload", data, { 
 	    // receive two parameter endpoint url ,form data 
 	    })
@@ -60,6 +69,13 @@ const Upload = ({changeTextValue}) =>{
 	      			onChange={(e) =>onChangeHandler(e)} 
 	      		/>
 	    	</div>
+	    	<div className="btnWrapper">
+	        <button 
+	          className="btnScan upload" 
+	          onClick={onClickHandler}>
+	          Upload
+	        </button>
+	      </div>
 	    </div>
   	)
 
