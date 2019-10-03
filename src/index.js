@@ -4,6 +4,7 @@ import "./styles.css";
 import { Tesseract } from "tesseract.ts";
 import axios from 'axios'
 import Upload from './components/upload'
+import CopyText from './components/copytext'
 
 const App = () => {
   // hook for text change
@@ -33,18 +34,13 @@ const App = () => {
     <>
       <p>{yourText}</p>
       <div className="btnWrapper">
-        <button 
-          className="btnScan" 
-          onClick={handleClickReset}>
-          Copy
-        </button>
+        <CopyText textValue={yourText} />
         <button 
           className="btnScan" 
           onClick={handleClickReset}>
           Scan Again
         </button>
       </div>
-      
     </>
   }
 
